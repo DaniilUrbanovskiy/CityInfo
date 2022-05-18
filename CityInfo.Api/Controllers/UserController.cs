@@ -6,6 +6,10 @@ namespace CityInfo.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        [HttpPost]
+        public IActionResult RegistrUser() 
+        { 
 
-    }
+        }
+    }   
 }
