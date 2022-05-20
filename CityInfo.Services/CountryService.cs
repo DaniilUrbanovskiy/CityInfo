@@ -17,7 +17,7 @@ namespace CityInfo.Services
         {
             var country = _context.Countries.FirstOrDefault(c => c.Name == enteredCountry);
 
-            var cityList = _context.Cities.Where(c => c.country.Id == country.Id).ToList();
+            var cityList = _context.Cities.Where(c => c.CountryId == country.Id).ToList();
 
             return cityList;
         }

@@ -8,6 +8,6 @@ namespace CityInfo.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }       
         public string Info { get; set; }
-        public Country country { get; set; }
+        public int CountryId { get; set; }
     }
 }

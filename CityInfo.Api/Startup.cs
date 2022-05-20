@@ -17,7 +17,6 @@ namespace CityInfo.Api
         {
             services.AddControllers();
             services.AddSwagger();
-
             services.AddServices();
             services.AddDbContext<SqlContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlContext")));
             services.AddJWTAuthorization(Configuration);
@@ -30,14 +29,10 @@ namespace CityInfo.Api
                 app.UseDeveloperExceptionPage();
                 app.UseCustomSwagger();
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
