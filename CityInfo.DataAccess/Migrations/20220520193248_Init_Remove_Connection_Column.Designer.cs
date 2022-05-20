@@ -4,14 +4,16 @@ using CityInfo.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CityInfo.DataAccess.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20220520193248_Init_Remove_Connection_Column")]
+    partial class Init_Remove_Connection_Column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,10 +23,13 @@ namespace CityInfo.DataAccess.Migrations
 
             modelBuilder.Entity("CityInfo.Domain.Entities.City", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CityId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CountryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Info")
                         .HasColumnType("nvarchar(max)");
@@ -32,25 +37,19 @@ namespace CityInfo.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("countryId")
-                        .HasColumnType("int");
+                    b.HasKey("CityId");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("countryId");
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("CityInfo.Domain.Entities.Country", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CountryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Flag")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Info")
                         .HasColumnType("nvarchar(max)");
@@ -58,7 +57,10 @@ namespace CityInfo.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("flag")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CountryId");
 
                     b.ToTable("Countries");
                 });
@@ -94,7 +96,7 @@ namespace CityInfo.DataAccess.Migrations
                 {
                     b.HasOne("CityInfo.Domain.Entities.Country", "country")
                         .WithMany("Citys")
-                        .HasForeignKey("countryId");
+                        .HasForeignKey("CountryId");
 
                     b.Navigation("country");
                 });

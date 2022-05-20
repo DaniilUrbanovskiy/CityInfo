@@ -1,10 +1,5 @@
-﻿using CityInfo.Domain;
+﻿using CityInfo.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CityInfo.DataAccess
 {
@@ -14,7 +9,8 @@ namespace CityInfo.DataAccess
         {
 
         }
-
         public DbSet<User> Users { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
     }
 }

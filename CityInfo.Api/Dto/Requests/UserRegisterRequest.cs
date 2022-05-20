@@ -1,16 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CityInfo.Domain
+namespace CityInfo.Api.Dto.Requests
 {
-    public class User
+    public class UserRegisterRequest
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 }
