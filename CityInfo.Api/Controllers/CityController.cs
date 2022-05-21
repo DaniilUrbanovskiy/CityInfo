@@ -11,23 +11,23 @@ namespace CityInfo.Api.Controllers
     [ApiController]
     [Authorize]
     [Route("[controller]")]
-    public class CountryController : ControllerBase
+    public class CityController : ControllerBase
     {
-        private readonly CountryService _countryService;
+        private readonly CityService _cityService;
         private readonly IMapper _mapper;
 
-        public CountryController(CountryService countryService, IMapper mapper)
+        public CityController(CityService cityService, IMapper mapper)
         {
-            _countryService = countryService;
+            _cityService = cityService;
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("select/{country}")]
+        public async Task<IActionResult> Select([FromRoute] string country)
         {
-            var result = await _countryService.GetCountries();
+            var result = await _cityService.GetCities(country);
 
-            var countries = _mapper.Map<List<CountryResponse>>(result);
+            var countries = _mapper.Map<List<CityResponse>>(result);
 
             return Ok(countries);
         }

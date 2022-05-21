@@ -1,4 +1,5 @@
 using CityInfo.Api.Configurations;
+using CityInfo.Api.Infrastructure;
 using CityInfo.DataAccess;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +21,7 @@ namespace CityInfo.Api
             services.AddServices();
             services.AddDbContext<SqlContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlContext")));
             services.AddJWTAuthorization(Configuration);
+            services.AddAutoMapper(typeof(ApiMappingProfile));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,8 +33,10 @@ namespace CityInfo.Api
             }
             app.UseHttpsRedirection();
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

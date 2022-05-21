@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CityInfo.Domain.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CityInfo.Domain.Entities
@@ -12,5 +13,6 @@ namespace CityInfo.Domain.Entities
         public string Email { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public Role Role { get; set; }
     }
 }

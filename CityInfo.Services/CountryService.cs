@@ -1,7 +1,9 @@
 ﻿using CityInfo.DataAccess;
 using CityInfo.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CityInfo.Services
 {
@@ -12,14 +14,11 @@ namespace CityInfo.Services
         {
             _context = context;
         }
-
-        public List<City> GetCities(string enteredCountry) 
+        public async Task<List<Country>> GetCountries()
         {
-            var country = _context.Countries.FirstOrDefault(c => c.Name == enteredCountry);
+            var countryList = await _context.Countries.ToListAsync();
 
-            var cityList = _context.Cities.Where(c => c.CountryId == country.Id).ToList();
-
-            return cityList;
+            return countryList;
         }
     }
 }

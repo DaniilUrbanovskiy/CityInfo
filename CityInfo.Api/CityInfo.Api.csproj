@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
@@ -17,10 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CityInfo.DataAccess\CityInfo.DataAccess.csproj" />
     <ProjectReference Include="..\CityInfo.Services\CityInfo.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dto\Responses\" />
   </ItemGroup>
 
 </Project>

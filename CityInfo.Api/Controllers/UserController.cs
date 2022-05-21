@@ -1,5 +1,7 @@
-﻿using CityInfo.Api.Dto.Requests;
+﻿using AutoMapper;
+using CityInfo.Api.Dto.Requests;
 using CityInfo.Api.Infrastructure;
+using CityInfo.Domain.Entities;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +16,12 @@ namespace CityInfo.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly UserService _userService;       
-        public UserController(UserService userService)
+        private readonly UserService _userService;
+        private readonly IMapper _mapper;
+        public UserController(UserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpPost("registr")]
@@ -25,14 +29,7 @@ namespace CityInfo.Api.Controllers
         {
             try
             {
-                var user = new Domain.Entities.User()
-                {
-                    Birthday = userInfo.Birthday,
-                    Email = userInfo.Email,
-                    Login = userInfo.Login,
-                    Name = userInfo.Name,
-                    Password = userInfo.Password
-                };
+                var user = _mapper.Map<User>(userInfo);
                 await _userService.Registration(user);
                 return Ok("Success");
             }
