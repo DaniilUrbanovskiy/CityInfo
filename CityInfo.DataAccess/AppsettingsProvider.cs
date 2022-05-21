@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace CityInfo.Api.Infrastructure
+namespace CityInfo.DataAccess
 {
     public static class AppsettingsProvider
     {

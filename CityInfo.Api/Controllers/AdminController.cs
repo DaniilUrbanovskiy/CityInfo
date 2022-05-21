@@ -4,14 +4,17 @@ using CityInfo.Domain.Entities;
 using CityInfo.Domain.Models;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace CityInfo.Api.Controllers
 {
     [ApiController]
-    [Authorize(Roles = nameof(Role.Admin))]
+    //[Authorize(Roles = nameof(Role.Admin))]
+    [AllowAnonymous]
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
@@ -24,21 +27,37 @@ namespace CityInfo.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("country")]
-        public async Task<IActionResult> AddCountry([FromBody] AddCountryRequest countryInfo) 
+        [HttpPost("country/{name}")]
+        public async Task<IActionResult> AddCountry([FromRoute] string name, IFormFile flag) 
         {
             try
             {
-                var country = _mapper.Map<Country>(countryInfo);
-                await _adminService.AddCountry(country);
-                return Ok();
+                var image = new Image();
+                image.Name = flag.FileName;
+                image.ContentType = flag.ContentType;
+                image.Body = flag.OpenReadStream();
+
+                await _adminService.AddCountry(name, image);
+                return Ok("Country was successfully added");
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
-        } 
-        
+        }
 
+        [HttpDelete("country/{name}")]
+        public async Task<IActionResult> RemoveCountry([FromRoute] string name)
+        {
+            try
+            {
+                await _adminService.RemoveCountry(name);
+                return Ok("Country was successfully removed");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

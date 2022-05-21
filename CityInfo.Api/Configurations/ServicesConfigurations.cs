@@ -1,4 +1,7 @@
-﻿using CityInfo.Services;
+﻿using Azure.Storage.Blobs;
+using CityInfo.Api.Infrastructure;
+using CityInfo.DataAccess;
+using CityInfo.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CityInfo.Api.Configurations
@@ -11,7 +14,10 @@ namespace CityInfo.Api.Configurations
             services.AddTransient<UserService>();
             services.AddTransient<CityService>();
             services.AddTransient<CountryService>();
-           
+            services.AddTransient(x => {
+                return new BlobServiceClient(AppsettingsProvider.GetJsonAppsettingsFile()["ConnectionStrings:AzureBlobStorage"]);
+            });
+
         }
     }
 }

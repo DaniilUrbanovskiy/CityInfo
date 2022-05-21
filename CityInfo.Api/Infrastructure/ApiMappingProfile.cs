@@ -13,7 +13,6 @@ namespace CityInfo.Api.Infrastructure
             CreateMap<UserRegisterRequest, User>();
             CreateMap<Country, CountryResponse>();
             CreateMap<City, CityResponse>();
-            CreateMap<AddCountryRequest, Country>();
         }
     }
 }
