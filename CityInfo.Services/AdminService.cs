@@ -68,7 +68,7 @@ namespace CityInfo.Services
             var settings = AppsettingsProvider.GetJsonAppsettingsFile();
             var blobContainer = _blobServiceClient.GetBlobContainerClient(settings["AzureBlob:BlobName"]);
             var blobClient = blobContainer.GetBlobClient(image.Name);
-            var blobHttpHeader = new BlobHttpHeaders { ContentType = image.ContentType };
+            var blobHttpHeader = new BlobHttpHeaders { ContentType = "image/jpg" };
             await blobClient.UploadAsync(image.Body, new BlobUploadOptions { HttpHeaders = blobHttpHeader });
             return $"{settings["AzureBlob:BlobUrl"]}/{settings["AzureBlob:BlobName"]}/{image.Name}";
         }

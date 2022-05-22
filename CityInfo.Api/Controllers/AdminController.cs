@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 namespace CityInfo.Api.Controllers
 {
     [ApiController]
-    //[Authorize(Roles = nameof(Role.Admin))]
-    [AllowAnonymous]
+    [Authorize(Roles = nameof(Role.Admin))]
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
