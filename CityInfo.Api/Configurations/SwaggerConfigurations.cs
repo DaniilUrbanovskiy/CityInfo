@@ -13,7 +13,7 @@ namespace CityInfo.Api.Configurations
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "FpvWorldMoney.API",
+                    Title = "CityInfo.API",
                     Version = "v1"
                 });
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()

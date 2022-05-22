@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Api", "CityInfo.Api\CityInfo.Api.csproj", "{BBAA92B1-08AE-42EE-876E-95604605DF40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Api", "CityInfo.Api\CityInfo.Api.csproj", "{BBAA92B1-08AE-42EE-876E-95604605DF40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Domain", "CityInfo.Domain\CityInfo.Domain.csproj", "{9E4C387D-976F-4E9B-8197-29BC3BA198B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Domain", "CityInfo.Domain\CityInfo.Domain.csproj", "{9E4C387D-976F-4E9B-8197-29BC3BA198B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.DataAccess", "CityInfo.DataAccess\CityInfo.DataAccess.csproj", "{D73DA35C-4AF0-411A-B5E6-CB0586A5FE86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.DataAccess", "CityInfo.DataAccess\CityInfo.DataAccess.csproj", "{D73DA35C-4AF0-411A-B5E6-CB0586A5FE86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Services", "CityInfo.Services\CityInfo.Services.csproj", "{E6988D13-0DBB-4C9C-81D9-388B02D73805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Services", "CityInfo.Services\CityInfo.Services.csproj", "{E6988D13-0DBB-4C9C-81D9-388B02D73805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.DataImport", "CityInfo.DataImport\CityInfo.DataImport.csproj", "{9AB05F33-DCF7-4392-B627-9DD8FDC277A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E6988D13-0DBB-4C9C-81D9-388B02D73805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6988D13-0DBB-4C9C-81D9-388B02D73805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6988D13-0DBB-4C9C-81D9-388B02D73805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB05F33-DCF7-4392-B627-9DD8FDC277A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB05F33-DCF7-4392-B627-9DD8FDC277A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB05F33-DCF7-4392-B627-9DD8FDC277A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB05F33-DCF7-4392-B627-9DD8FDC277A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

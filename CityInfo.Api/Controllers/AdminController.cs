@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using CityInfo.Api.Dto.Requests;
-using CityInfo.Domain.Entities;
 using CityInfo.Domain.Models;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace CityInfo.Api.Controllers
@@ -52,6 +49,34 @@ namespace CityInfo.Api.Controllers
             try
             {
                 await _adminService.RemoveCountry(name);
+                return Ok("Country was successfully removed");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("city/{name}")]
+        public async Task<IActionResult> AddCity([FromRoute] string name, string info)
+        {                      
+            try
+            {
+                await _adminService.AddCity(name, info);
+                return Ok("City was successfully added");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("city/{name}")]
+        public async Task<IActionResult> RemoveCity([FromRoute] string name)
+        {
+            try
+            {
+                await _adminService.RemoveCity(name);
                 return Ok("Country was successfully removed");
             }
             catch (Exception ex)

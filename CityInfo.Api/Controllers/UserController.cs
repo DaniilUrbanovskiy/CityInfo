@@ -18,6 +18,7 @@ namespace CityInfo.Api.Controllers
     {
         private readonly UserService _userService;
         private readonly IMapper _mapper;
+
         public UserController(UserService userService, IMapper mapper)
         {
             _userService = userService;
