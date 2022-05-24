@@ -59,5 +59,21 @@ namespace CityInfo.Services
             _context.UserCity.Add(new UserCity(userId, (int)cityId));
             _context.SaveChanges();
         }
+
+        public void RemoveFavourites(int userId, string cityName)
+        {
+            var cityId = _context.Cities.FirstOrDefault(x => x.Name == cityName)?.Id;
+            if (cityId == null)
+            {
+                throw new Exception("Incorrect city name!");
+            }
+            if (_context.UserCity.FirstOrDefault(x => x.CityId == cityId && x.UserId == userId) == null)
+            {
+                throw new Exception("You don`t have city in your favourites!");
+            }
+            var city = _context.UserCity.FirstOrDefault(x => x.CityId == cityId && x.UserId == userId);
+            _context.UserCity.Remove(city);
+            _context.SaveChanges();
+        }
     }
 }

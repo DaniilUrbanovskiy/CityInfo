@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace CityInfo.Api.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
@@ -28,6 +28,7 @@ namespace CityInfo.Api.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpPost("registr")]
         public async Task<IActionResult> Registr([FromBody] UserRegisterRequest userInfo)
         {
@@ -43,6 +44,7 @@ namespace CityInfo.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest userInfo)
         {
@@ -58,7 +60,6 @@ namespace CityInfo.Api.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet("favourites/get")]
         public IActionResult GetFavourites() 
         {
@@ -70,7 +71,6 @@ namespace CityInfo.Api.Controllers
             return Ok(cities);
         }
 
-        [Authorize]
         [HttpPost("favourites/set/{cityName}")]
         public IActionResult SetFavourites([FromRoute]string cityName)
         {
@@ -84,6 +84,21 @@ namespace CityInfo.Api.Controllers
             {
                 return StatusCode(500, ex.Message);
             }          
+        }
+
+        [HttpDelete("favourites/remove/{cityName}")]
+        public IActionResult RemoveFavourites([FromRoute] string cityName)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            try
+            {
+                _userService.RemoveFavourites(int.Parse(userId), cityName);
+                return Ok($"{cityName} was removed successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }   
 }

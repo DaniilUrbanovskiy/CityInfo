@@ -27,11 +27,9 @@ namespace CityInfo.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseCustomSwagger();
-            }
+            app.UseDeveloperExceptionPage();
+            app.UseCustomSwagger();
+
             app.UseHttpsRedirection();
             app.UseRouting();
 
