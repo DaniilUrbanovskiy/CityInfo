@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CityInfo.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     [Route("[controller]")]
     public class CityController : ControllerBase
     {
