@@ -4,7 +4,6 @@ using CityInfo.DataAccess;
 using CityInfo.Domain.Entities;
 using CityInfo.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,23 +28,17 @@ namespace CityInfo.Services
             });
             _context.SaveChanges();
         }
-        public async Task AddCity(string name, string info)
+        public async Task AddCity(string cityName, string countryName, string info, Image image)
         {
-            var countryList = await _context.Countries.ToListAsync();
-            int countryId = default;
-            foreach (var country in countryList)
-            {
-                if (info.Contains(country.Name) == true)
-                {
-                    countryId = country.Id;
-                    break;
-                }
-            }
-            _context.Cities.Add(new City()
-            {
-                Name = name,
+            var country = _context.Countries.FirstOrDefault(c => c.Name == countryName);
+            var imageUrl = await AddFileToBlob(image);
+            
+            await _context.Cities.AddAsync(new City()
+            {          
+                Name = cityName,
                 Info = info,
-                CountryId = countryId
+                CountryId = country.Id,
+                CityImage = imageUrl
             });
             _context.SaveChanges();
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CityInfo.Api.Dto.Requests;
 using CityInfo.Domain.Models;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -56,12 +57,17 @@ namespace CityInfo.Api.Controllers
             }
         }
 
-        [HttpPost("city/{name}")]
-        public async Task<IActionResult> AddCity([FromRoute] string name, string info)
+        [HttpPost("city/{cityName}/country/{countryName}")]
+        public async Task<IActionResult> AddCity([FromRoute] string cityName, [FromRoute] string countryName, [FromQuery] string info, IFormFile cityImage)
         {                      
             try
             {
-                await _adminService.AddCity(name, info);
+                var image = new Image();
+                image.Name = cityImage.FileName;
+                image.ContentType = cityImage.ContentType;
+                image.Body = cityImage.OpenReadStream();
+
+                await _adminService.AddCity(cityName, countryName, info, image);
                 return Ok("City was successfully added");
             }
             catch (Exception ex)
@@ -76,7 +82,7 @@ namespace CityInfo.Api.Controllers
             try
             {
                 await _adminService.RemoveCity(name);
-                return Ok("Country was successfully removed");
+                return Ok("City was successfully removed");
             }
             catch (Exception ex)
             {

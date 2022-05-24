@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityInfo.DataAccess.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20220521155738_Init_Add_Users_Roles")]
-    partial class Init_Add_Users_Roles
+    [Migration("20220524185614_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace CityInfo.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CityImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
@@ -52,9 +55,6 @@ namespace CityInfo.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Flag")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Info")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -93,6 +93,24 @@ namespace CityInfo.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CityInfo.Domain.Entities.UserCity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserCity");
                 });
 
             modelBuilder.Entity("CityInfo.Domain.Entities.City", b =>

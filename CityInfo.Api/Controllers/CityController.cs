@@ -27,9 +27,9 @@ namespace CityInfo.Api.Controllers
         {
             var result = await _cityService.GetCities(country);
 
-            var countries = _mapper.Map<List<CityResponse>>(result);
+            var cities = _mapper.Map<List<CityResponse>>(result);
 
-            return Ok(countries);
+            return Ok(cities);
         }
     }
 }

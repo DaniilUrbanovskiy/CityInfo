@@ -26,6 +26,9 @@ namespace CityInfo.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CityImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
@@ -88,6 +91,24 @@ namespace CityInfo.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CityInfo.Domain.Entities.UserCity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserCity");
                 });
 
             modelBuilder.Entity("CityInfo.Domain.Entities.City", b =>

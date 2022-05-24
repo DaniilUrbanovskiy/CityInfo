@@ -12,5 +12,6 @@ namespace CityInfo.DataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<UserCity> UserCity { get; set; }
     }
 }

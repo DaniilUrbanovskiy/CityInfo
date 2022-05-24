@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using CityInfo.Api.Dto.Requests;
+using CityInfo.Api.Dto.Responses;
 using CityInfo.Api.Infrastructure;
 using CityInfo.Domain.Entities;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CityInfo.Api.Controllers
@@ -53,6 +56,34 @@ namespace CityInfo.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [Authorize]
+        [HttpGet("favourites/get")]
+        public IActionResult GetFavourites() 
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var result =  _userService.GetFavourites(int.Parse(userId));
+            var cities = _mapper.Map<List<CityResponse>>(result);
+
+            return Ok(cities);
+        }
+
+        [Authorize]
+        [HttpPost("favourites/set/{cityName}")]
+        public IActionResult SetFavourites([FromRoute]string cityName)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            try
+            {
+                _userService.SetFavourites(int.Parse(userId), cityName);
+                return Ok($"{cityName} was added successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }          
         }
     }   
 }
