@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CityInfo.DataAccess.Migrations
 {
-    public partial class Init : Migration
+    public partial class init_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {          
+        {
             migrationBuilder.CreateTable(
                 name: "UserCity",
                 columns: table => new

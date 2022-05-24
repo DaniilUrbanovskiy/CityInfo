@@ -20,7 +20,7 @@ namespace CityInfo.Api
             services.AddControllers();
             services.AddSwagger();
             services.AddServices();
-            services.AddDbContext<SqlContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlContext")));
+            services.AddDbContext<SqlContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SqlContextProd")));
             services.AddJWTAuthorization(Configuration);
             services.AddAutoMapper(typeof(ApiMappingProfile));
         }

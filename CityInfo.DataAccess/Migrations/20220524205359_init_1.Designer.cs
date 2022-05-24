@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityInfo.DataAccess.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    [Migration("20220524185614_Init")]
-    partial class Init
+    [Migration("20220524205359_init_1")]
+    partial class init_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
