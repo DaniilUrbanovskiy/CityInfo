@@ -22,8 +22,10 @@ namespace CityInfo.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("select/{country}")]
-        public async Task<IActionResult> Select([FromRoute] string country)
+        [HttpGet]
+        [Route("select")]
+        [Route("select/{country}")]
+        public async Task<IActionResult> Select([FromRoute] string country = null)
         {
             var result = await _cityService.GetCities(country);
 

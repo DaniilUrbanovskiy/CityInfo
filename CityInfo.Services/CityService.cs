@@ -16,10 +16,16 @@ namespace CityInfo.Services
         }
         public async Task<List<City>> GetCities(string countryName)
         {
-            var country = _context.Countries.FirstOrDefault(c => c.Name == countryName);
-
-            var cityList = await _context.Cities.Where(c => c.CountryId == country.Id).ToListAsync();
-
+            var cityList = new List<City>();
+            if (countryName == null)
+            {
+                cityList = await _context.Cities.ToListAsync();
+            }
+            else
+            {
+                var country = _context.Countries.FirstOrDefault(c => c.Name == countryName);
+                cityList = await _context.Cities.Where(c => c.CountryId == country.Id).ToListAsync();
+            }
             return cityList;
         }
     }
