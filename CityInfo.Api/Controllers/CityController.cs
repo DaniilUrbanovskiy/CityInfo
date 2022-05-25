@@ -3,6 +3,7 @@ using CityInfo.Api.Dto.Responses;
 using CityInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -27,11 +28,17 @@ namespace CityInfo.Api.Controllers
         [Route("select/{country}")]
         public async Task<IActionResult> Select([FromRoute] string country = null)
         {
-            var result = await _cityService.GetCities(country);
+            try
+            {
+                var result = await _cityService.GetCities(country);
+                var cities = _mapper.Map<List<CityResponse>>(result);
+                return Ok(cities);
 
-            var cities = _mapper.Map<List<CityResponse>>(result);
-
-            return Ok(cities);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

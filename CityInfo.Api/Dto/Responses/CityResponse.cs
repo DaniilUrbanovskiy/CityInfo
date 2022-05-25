@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public string Info { get; set; }
         public string CityImage { get; set; }
+        public int CountryId { get; set; }
     }
 }

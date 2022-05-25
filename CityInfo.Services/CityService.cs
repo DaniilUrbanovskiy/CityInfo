@@ -1,6 +1,7 @@
 ﻿using CityInfo.DataAccess;
 using CityInfo.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ namespace CityInfo.Services
             else
             {
                 var country = _context.Countries.FirstOrDefault(c => c.Name == countryName);
+                if (country == null)
+                {
+                    throw new Exception("Incorrect country name");
+                }
                 cityList = await _context.Cities.Where(c => c.CountryId == country.Id).ToListAsync();
             }
             return cityList;
